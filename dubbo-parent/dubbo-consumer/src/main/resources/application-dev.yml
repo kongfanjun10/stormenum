@@ -1,0 +1,54 @@
+server:
+  port: 8083
+
+spring:
+  datasource:  #数据库四要素
+    username: yancy
+    password: yancy
+    url: jdbc:mysql://127.0.0.1:3306/yan_1808 #?serverTimezone=CTT&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    driver-class-name: com.mysql.jdbc.Driver
+    #druid连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      initial-size: 5      #初始化提供的连接数
+      min-idle: 5          # 数据库连接池的最小维持连接数
+      max-idle: 5          # 最大的连接数
+  #freemaker
+  freemarker:
+    suffix: .ftl                                      # 设置模板后缀名
+    content-type: text/html                           # 设置文档类型
+    charset: UTF-8                                    # 设置页面编码格式
+    cache: false                                      # 设置页面缓存
+    template-loader-path: classpath:/templates/User   # 设置ftl文件路径
+      #- classpath:/templates/User
+  # 设置静态文件路径，js,css等
+  mvc:
+    static-path-pattern: /static
+
+
+
+
+mybatis:
+  #config-location: classpath:mybatis/mybatis-config.xml    #引入mybatis-config.xml文件
+  #mapper-locations: classpath:mapping/*Mapper.xml          #扫描mapper.xml文件，resources目录下
+  type-aliases-package: com.consumer.entity                      #aliases别名
+  configuration:                                            #开启驼峰命名
+      map-underscore-to-camel-case: true
+
+logging:  #显示sql语句
+  level:
+    com:
+      yan:
+        mapper : debug
+
+
+dubbo:
+  application:
+    name: provider
+  registry:     #注册中心配置，用于配置连接注册中心相关信息
+    address: zookeeper://127.0.0.1:2181
+  protocol:     #协议配置，用于配置提供服务的协议信息，协议由提供方指定，消费方被动接受
+    name: dubbo
+    port: 20880
+
+

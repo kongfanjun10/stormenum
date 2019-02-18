@@ -1,0 +1,3 @@
+com\provider\service\IUserService.class
+com\provider\DubboProviderApplication.class
+com\provider\service\impl\UserServiceImpl.class
